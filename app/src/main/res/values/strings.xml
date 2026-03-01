@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Moodymoody</string>
+    <string name="mood_reminder_title">Coucou MoodyMoody</string>
+    <string name="mood_reminder_body">Comment tu te sens aujourd\'hui ?</string>
+    <string name="mood_reminder_channel_name">Rappels MoodyMoody</string>
+    <string name="mood_reminder_channel_description">Notifications quotidiennes pour saisir ton humeur</string>
+</resources>
