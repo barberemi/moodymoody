@@ -5,7 +5,8 @@ import com.example.moodymoody.R
 enum class MoodIconFamily(val prefix: String, val label: String) {
     POUSSIN("poussin", "Poussin"),
     NUAGE("nuage", "Nuage"),
-    PANDA("panda", "Panda");
+    PANDA("panda", "Panda"),
+    OURSON("ourson", "Ourson");
 
     fun drawableForMood(key: String): Int {
         val resourceName = "${prefix}_${key}"
@@ -32,7 +33,12 @@ enum class MoodIconFamily(val prefix: String, val label: String) {
             "panda_bien" to R.drawable.panda_bien,
             "panda_neutre" to R.drawable.panda_neutre,
             "panda_moyen" to R.drawable.panda_moyen,
-            "panda_mauvais" to R.drawable.poussin_moyen,
+            "panda_mauvais" to R.drawable.panda_mauvais,
+            "ourson_super" to R.drawable.panda_super,
+            "ourson_bien" to R.drawable.panda_bien,
+            "ourson_neutre" to R.drawable.ourson_neutre,
+            "ourson_moyen" to R.drawable.panda_moyen,
+            "ourson_mauvais" to R.drawable.panda_mauvais,
         )
     }
 }

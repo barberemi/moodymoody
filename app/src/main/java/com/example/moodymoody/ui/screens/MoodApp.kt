@@ -96,6 +96,8 @@ import java.time.YearMonth
 import java.time.format.TextStyle
 import java.util.Locale
 import kotlinx.coroutines.launch
+import kotlin.text.chunked
+import kotlin.text.forEach
 
 private val NightBackground = Color(0xFF0B1621)
 private val AccentGold = Color(0xFFD4AF37)
@@ -543,8 +545,8 @@ private fun SettingsScreen(
     onFamilyChange: (MoodIconFamily) -> Unit
 ) {
     val reminderTime by reminderTimeState.collectAsState()
-    var hour by remember { mutableStateOf(reminderTime.hour) }
-    var minute by remember { mutableStateOf(reminderTime.minute) }
+    var hour by remember(reminderTime) { mutableStateOf(reminderTime.hour) }
+    var minute by remember(reminderTime) { mutableStateOf(reminderTime.minute) }
     val formattedHour = hour.toString().padStart(2, '0')
     val formattedMinute = minute.toString().padStart(2, '0')
 
@@ -573,23 +575,31 @@ private fun SettingsScreen(
             text = "Choix du style",
             style = MaterialTheme.typography.titleMedium.copy(color = OnNight)
         )
-        Row(
-            horizontalArrangement = Arrangement.spacedBy(12.dp)
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            MoodIconFamily.values().forEach { family ->
-                val selected = family == currentFamily
-                Button(
-                    onClick = { onFamilyChange(family) },
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = if (selected) AccentGold else CardStroke,
-                        contentColor = if (selected) NightBackground else OnNight
-                    )
+            MoodIconFamily.values().toList().chunked(2).forEach { rowFamilies ->
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
-                    Image(
-                        painter = painterResource(id = family.drawableForMood("super")),
-                        contentDescription = family.label,
-                        modifier = Modifier.size(45.dp)
-                    )
+                    rowFamilies.forEach { family ->
+                        val selected = family == currentFamily
+                        Button(
+                            onClick = { onFamilyChange(family) },
+                            colors = ButtonDefaults.buttonColors(
+                                containerColor = if (selected) AccentGold else CardStroke,
+                                contentColor = if (selected) NightBackground else OnNight
+                            )
+                        ) {
+                            Image(
+                                painter = painterResource(id = family.drawableForMood("super")),
+                                contentDescription = family.label,
+                                modifier = Modifier.size(45.dp)
+                            )
+                        }
+                    }
                 }
             }
         }
