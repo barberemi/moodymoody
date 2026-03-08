@@ -38,7 +38,7 @@ enum class MoodIconFamily(val prefix: String, val label: String) {
             "ourson_bien" to R.drawable.ourson_bien,
             "ourson_neutre" to R.drawable.ourson_neutre,
             "ourson_moyen" to R.drawable.ourson_moyen,
-            "ourson_mauvais" to R.drawable.panda_mauvais,
+            "ourson_mauvais" to R.drawable.ourson_mauvais,
         )
     }
 }
